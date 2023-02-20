@@ -17,7 +17,7 @@ public class BoyerMooreHorspool {
 
         //we start comparing the pattern from the right and the subset of the array of length pattern from the right
         //i traverses through the array and starts from the length of pattern
-        for (int i = (pattern.length - 1); i <= array.length; ) {
+        for (int i = (pattern.length - 1); i < array.length; ) {
 
             //we go to this loop only if the character at the end of the pattern matches with the character at the
             //i th index of the array, at the start, i == j, but as the program continues, value of i will increase
