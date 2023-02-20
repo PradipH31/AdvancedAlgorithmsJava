@@ -8,6 +8,25 @@ package org.pradip.algorithm.boyermoore;
 public class BoyerMoore {
 
     /**
+     * baidai
+     * 1st round 6,7,8,9,10,11
+     * Here, no prefix as bai cannot equal dai
+     * So, index 0 of table 6(length of pattern) and keeps on increasing for subsequent indices
+     *
+     * @param pattern
+     * @return
+     */
+    public int[] preprocessSuffixTable(char[] pattern) {
+        int[] table = new int[pattern.length];
+        int lastPrefixPosition = pattern.length;
+        for (int i = pattern.length; i > 0; --i) {
+            if (isPrefix(pattern, i)) lastPrefixPosition = i;
+            table[pattern.length - i] = lastPrefixPosition - i + pattern.length;
+        }
+        return table;
+    }
+
+    /**
      * Just a method to check the prefix starting from given index and the whole char from 0
      * <p>
      * Example
@@ -35,6 +54,7 @@ public class BoyerMoore {
     /**
      * return the length of substring from the given index of the pattern that matches the suffix of the
      * pattern (substring of the pattern from the last index, going backwards)
+     *
      * @param pattern
      * @param index
      * @return

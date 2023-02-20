@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.pradip.algorithm.boyermoore.BoyerMoore;
 
+import java.util.Arrays;
+
 public class BoyerMooreTest {
 
     BoyerMoore b = null;
@@ -30,6 +32,11 @@ public class BoyerMooreTest {
         Assert.assertEquals(3, b.suffixLength("kaikai".toCharArray(), 2));
         Assert.assertEquals(1, b.suffixLength("mytestmytest".toCharArray(), 2));
         Assert.assertEquals(6, b.suffixLength("mytestmytest".toCharArray(), 5));
+    }
+
+    @Test
+    public void preprocessingSuffxTableTest() {
+        System.out.println(Arrays.toString(b.preprocessSuffixTable("baidai".toCharArray())));
     }
 
 }
