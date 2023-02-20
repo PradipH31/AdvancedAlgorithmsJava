@@ -7,6 +7,27 @@ public class ZAlgorithm {
 
     private char SEPARATOR = '$';
 
+    public int search(char[] pattern, char[] array) {
+        int[] z = createZTable(pattern, array);
+        int i = pattern.length + 1;
+        while (i < z.length) {
+            if (z[i] == pattern.length) return (i - pattern.length - 1);
+            i++;
+        }
+        return -1;
+    }
+
+    public int[] searchAll(char[] pattern, char[] array) {
+        int[] result = new int[array.length];
+        int[] z = createZTable(pattern, array);
+        int i = pattern.length + 1;
+        while (i < z.length) {
+            if (z[i] == pattern.length) result[i - pattern.length - 1] = z[i];
+            i++;
+        }
+        return result;
+    }
+
     /**
      * regarding the length of z array:
      * pattern = abc
@@ -45,9 +66,9 @@ public class ZAlgorithm {
                 //this is used when the word and the pattern is very long.
                 //in that case, we use the z index of previous values that have the same z-index and replace them
                 if (z[k] < right - i + 1) z[i] = z[k];
-                //but if there are further elements after the number of correct preix matches,
-                //then we need to compute the z-index again
-                //https://youtu.be/CpZh4eF8QBw?t=457
+                    //but if there are further elements after the number of correct preix matches,
+                    //then we need to compute the z-index again
+                    //https://youtu.be/CpZh4eF8QBw?t=457
                 else {
                     left = i;
                     while (right < longString.length && longString[right - left] == longString[right]) right++;
