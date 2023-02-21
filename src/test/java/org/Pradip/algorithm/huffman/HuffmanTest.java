@@ -44,6 +44,8 @@ public class HuffmanTest {
         Assert.assertEquals(3, queue.poll().frequency);
 
         Assert.assertEquals(0, queue.size());
+
+        Assert.assertEquals("\u0001:a2:b3:c1:d1\u0002", h.header.toString());
     }
 
     @Test
@@ -123,6 +125,35 @@ public class HuffmanTest {
     @Test
     public void compressTest() {
         System.out.println(h.compress("aabbbcd".toCharArray()));
+    }
+
+    @Test
+    public void parseHeaderAsFrequencyTest() {
+        char[] c = "\u0001:a2:b3:c1:d1\u000210101010101".toCharArray();
+        int[] freq = h.parseHeaderAsFrequency(c);
+        Assert.assertEquals(2, freq['a']);
+        Assert.assertEquals(3, freq['b']);
+        Assert.assertEquals(1, freq['c']);
+        Assert.assertEquals(1, freq['d']);
+    }
+
+    @Test
+    public void decodeStringTest() {
+        char[] c = "\u0001:a2:b3:c1:d1\u00021010000110111".toCharArray();
+        int[] freq = h.parseHeaderAsFrequency(c);
+        PriorityQueue<HuffmanNode> queue = h.createPriorityQueue(freq);
+        HuffmanNode root = h.createHuffmanTree(queue);
+        String decoded = h.decodeString(c, root);
+        Assert.assertEquals("aabbbcd", decoded);
+        Assert.assertNotSame("aaa",decoded);
+    }
+
+    @Test
+    public void decompressTest() {
+        Huffman huffman = new Huffman();
+        char[] c = "\u0001:a2:b3:c1:d1\u00021010000110111".toCharArray();
+        char[] decompressed = huffman.decompress(c);
+        Assert.assertArrayEquals("aabbbcd".toCharArray(),decompressed);
     }
 
 }
