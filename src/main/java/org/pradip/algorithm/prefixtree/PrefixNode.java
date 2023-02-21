@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class PrefixNode {
     public char c;
-    int id;
+    public int id;
     Map<Character, PrefixNode> children;
     public boolean isWord = false;
 
