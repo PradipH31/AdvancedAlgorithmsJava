@@ -18,9 +18,12 @@ public class SuffixNode {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("SuffixNode [start=");
-        s.append(start).append("]");
+        s.append(start).append("]").append(", end").append(end.end).append("]");
         for (int i = 0; i < children.length; i++) {
-            if (children[i] != null) s.append((char) i);
+            if (children[i] != null) {
+                s.append((char) i);
+                s.append("->").append(children[i]);
+            }
         }
         return s.toString();
     }

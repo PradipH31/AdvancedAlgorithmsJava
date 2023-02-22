@@ -23,4 +23,15 @@ public class SuffixTreeTest {
 
         Assert.assertEquals(expected, result);
     }
+
+    @Test
+    public void buildSuffixTreeTest() {
+        t.buildSuffixTree();
+        t.dfsTraversal();
+        System.out.println(t.root);
+        t = new SuffixTree("aabaaca".toCharArray());
+        t.buildSuffixTree();
+        t.dfsTraversal();
+        System.out.println(t.root);
+    }
 }
